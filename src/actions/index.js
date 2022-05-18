@@ -24,7 +24,7 @@ export const getCurrenciesThunk = () => {
     const response = await fetch(API);
     const object = await response.json();
     const data = Object.keys(object);
-    const data1 = data.filter((item) => item !== 'USDT');
-    dispatch(addCurrencies(data1));
+    const currencies = data.filter((item) => item !== 'USDT');
+    dispatch(addCurrencies(currencies));
   };
 };
