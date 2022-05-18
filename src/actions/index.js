@@ -7,12 +7,24 @@ export const addUser = (email) => ({
   email,
 });
 
-export const addCurrencies = (value) => ({
+export const addCurrencies = (currencies) => ({
   type: ADD_CURRENCIES,
-  value,
+  currencies,
 });
 
 export const addExpenses = (value) => ({
   type: ADD_EXPENSES,
   value,
 });
+
+export const getCurrenciesThunk = () => {
+  console.log('tuc');
+  return async (dispatch) => {
+    const API = 'https://economia.awesomeapi.com.br/json/all';
+    const response = await fetch(API);
+    const object = await response.json();
+    const data = Object.keys(object);
+    const data1 = data.filter((item) => item !== 'USDT');
+    dispatch(addCurrencies(data1));
+  };
+};
