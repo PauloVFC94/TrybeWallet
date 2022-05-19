@@ -12,9 +12,10 @@ export const addCurrencies = (currencies) => ({
   currencies,
 });
 
-export const addExpenses = (value) => ({
+export const addExpenses = (expenses, currencies) => ({
   type: ADD_EXPENSES,
-  value,
+  expenses,
+  currencies,
 });
 
 export const getCurrenciesThunk = () => {
@@ -26,5 +27,15 @@ export const getCurrenciesThunk = () => {
     const data = Object.keys(object);
     const currencies = data.filter((item) => item !== 'USDT');
     dispatch(addCurrencies(currencies));
+  };
+};
+
+export const getAPI = (expense) => {
+  console.log('tac');
+  return async (dispatch) => {
+    const API = 'https://economia.awesomeapi.com.br/json/all';
+    const response = await fetch(API);
+    const currencies = await response.json();
+    dispatch(addExpenses(expense, currencies));
   };
 };

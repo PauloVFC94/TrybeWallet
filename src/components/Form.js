@@ -1,32 +1,66 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { getAPI } from '../actions/index';
 
 class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      valor: 0,
-      moeda: '',
-      pagamento: '',
-      categoria: '',
+      expense: {},
+      id: 0,
+      value: 0,
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: 'Alimentação',
       description: '',
     };
   }
 
+  handleChangerForm = ({ target }) => {
+    const { name } = target;
+    this.setState({ [name]: target.value,
+    }, () => {
+      const { id, value, currency, method, tag, description } = this.state;
+      this.setState({
+        expense: {
+          id,
+          value,
+          currency,
+          method,
+          tag,
+          description,
+        },
+      });
+    });
+  };
+
+  buttonForm = (event) => {
+    event.preventDefault();
+    const { addExp } = this.props;
+    const { id, expense } = this.state;
+    addExp(expense);
+    this.setState({
+      id: (id + 1),
+      value: 0,
+      description: '',
+    });
+  };
+
   render() {
     const { currencies } = this.props;
-    const { valor, moeda, pagamento, categoria, description } = this.state;
+    const { value, currency, method, tag, description } = this.state;
     return (
       <form>
-        <label htmlFor="valor">
+        <label htmlFor="value">
           Valor
           <input
             type="number"
             data-testid="value-input"
-            name="valor"
-            id="valor"
-            value={ valor }
+            name="value"
+            id="value"
+            value={ value }
+            onChange={ this.handleChangerForm }
           />
         </label>
         <label htmlFor="description">
@@ -37,14 +71,16 @@ class Form extends Component {
             name="description"
             id="description"
             value={ description }
+            onChange={ this.handleChangerForm }
           />
         </label>
-        <label htmlFor="moeda">
+        <label htmlFor="currency">
           Moeda
           <select
-            name="moeda"
-            id="moeda"
-            value={ moeda }
+            name="currency"
+            id="currency"
+            value={ currency }
+            onChange={ this.handleChangerForm }
           >
             {currencies.map((element) => (
               <option
@@ -56,26 +92,28 @@ class Form extends Component {
             ))}
           </select>
         </label>
-        <label htmlFor="pagamento">
+        <label htmlFor="method">
           Método de Pagamento
           <select
             data-testid="method-input"
-            name="pagamento"
-            id="pagamento"
-            value={ pagamento }
+            name="method"
+            id="method"
+            value={ method }
+            onChange={ this.handleChangerForm }
           >
-            <option value="Dinheiro">Dinheiro</option>
-            <option value="Cartão de Débito">Cartão de débito</option>
-            <option value="Cartão de Crédito">Cartão de crédito</option>
+            <option>Dinheiro</option>
+            <option>Cartão de débito</option>
+            <option>Cartão de crédito</option>
           </select>
         </label>
-        <label htmlFor="categoria">
+        <label htmlFor="tag">
           Categoria
           <select
             data-testid="tag-input"
-            name="categoria"
-            id="categoria"
-            value={ categoria }
+            name="tag"
+            id="tag"
+            value={ tag }
+            onChange={ this.handleChangerForm }
           >
             <option value="Alimentação">Alimentação</option>
             <option value="Lazer">Lazer</option>
@@ -84,6 +122,13 @@ class Form extends Component {
             <option value="Saúde">Saúde</option>
           </select>
         </label>
+        <button
+          type="submit"
+          onClick={ this.buttonForm }
+          id="btn-form"
+        >
+          Adicionar Despesa
+        </button>
       </form>
     );
   }
@@ -91,10 +136,15 @@ class Form extends Component {
 
 Form.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
+  addExp: PropTypes.func.isRequired,
 };
+
+const mapDispatchToProps = (dispatch) => ({
+  addExp: (expenses) => dispatch(getAPI(expenses)),
+});
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
 });
 
-export default connect(mapStateToProps, null)(Form);
+export default connect(mapStateToProps, mapDispatchToProps)(Form);
