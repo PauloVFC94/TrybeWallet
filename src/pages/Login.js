@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addUser } from '../actions/index';
+import './Login.css';
+import trybewallet from './trybewallet.png';
 
 class Login extends React.Component {
   constructor(props) {
@@ -38,7 +40,11 @@ class Login extends React.Component {
   render() {
     const { isDisable, email, password } = this.state;
     return (
-      <div>
+      <div className="login-input">
+        <img 
+         src={ trybewallet }
+         alt="trybewallet logo"
+        />
         <input
           type="text"
           onChange={ this.handleChanger }

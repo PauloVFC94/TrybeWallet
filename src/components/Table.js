@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { editExpense, removeExpenses } from '../actions/index';
+import './Table.css';
 
 class Table extends Component {
   removeBtn = ({ target }) => {
@@ -28,7 +29,7 @@ class Table extends Component {
     return (
       <table>
         <tbody>
-          <tr>
+          <tr className="table-header">
             <th>Descrição</th>
             <th>Tag</th>
             <th>Método de pagamento</th>
@@ -43,7 +44,7 @@ class Table extends Component {
             const objCurrencies = Object.entries(despesa.exchangeRates)
               .find((element) => element[1].code === despesa.currency)[1];
             return (
-              <tr key={ despesa.id }>
+              <tr classname="despesas" key={ despesa.id }>
                 <td>{ despesa.description }</td>
                 <td>{ despesa.tag }</td>
                 <td>{ despesa.method }</td>
@@ -58,6 +59,7 @@ class Table extends Component {
                     onClick={ this.editBtn }
                     type="button"
                     data-testid="edit-btn"
+                    className="edit-btn"
                   >
                     Editar
                   </button>
@@ -66,6 +68,7 @@ class Table extends Component {
                     onClick={ this.removeBtn }
                     type="button"
                     data-testid="delete-btn"
+                    className="delete-btn"
                   >
                     Excluir
                   </button>

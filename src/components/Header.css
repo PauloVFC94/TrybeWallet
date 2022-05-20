@@ -1,0 +1,28 @@
+.header-div {
+  align-items: center;
+  background-color: #129D4E;
+  box-shadow: 2px 2px 2px 2px rgba(141, 140, 140, 0.548);
+  display: flex;
+  height: 80px;
+  justify-content: space-between;
+}
+
+.header-div img {
+  height: 60px;
+}
+
+.header-email {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 20px;
+  margin-right: 20px;
+  padding: 20px;
+  width: 400px;
+}
+
+.header-values {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}

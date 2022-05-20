@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getAPI, editExpense, editExpense2 } from '../actions/index';
+import './Form.css';
 
 class Form extends Component {
   constructor(props) {
@@ -44,6 +45,9 @@ class Form extends Component {
       id: (id + 1),
       value: 0,
       description: '',
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: 'Alimentação',
     });
   };
 
@@ -67,6 +71,13 @@ class Form extends Component {
     editExp2(auxiliar);
     const edit1 = false;
     editExp(edit1);
+    this.setState({
+      value: 0,
+      description: '',
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: 'Alimentação',
+    });
   }
 
   render() {
