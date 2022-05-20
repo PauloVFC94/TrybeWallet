@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import './Header.css';
-import trybewallet from './trybewallet-form.png'
+import trybewallet from './trybewallet-form.png';
 
 class Header extends Component {
   constructor(props) {
@@ -25,11 +25,11 @@ class Header extends Component {
         <img src={ trybewallet } alt="trybewallet logo" />
         <div className="header-email">
           <label htmlFor="email-header">
-            Usuário: 
+            Usuário:
             <h3 name="email-header" data-testid="email-field">{ email }</h3>
           </label>
           <label htmlFor="header-values">
-            Saldo de dívidas: 
+            Saldo de dívidas:
             <div className="header-values" name="header-values">
               <h3 data-testid="total-field">{ total.toFixed(2) }</h3>
               <h3 data-testid="header-currency-field">{ moeda }</h3>

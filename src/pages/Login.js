@@ -41,9 +41,9 @@ class Login extends React.Component {
     const { isDisable, email, password } = this.state;
     return (
       <div className="login-input">
-        <img 
-         src={ trybewallet }
-         alt="trybewallet logo"
+        <img
+          src={ trybewallet }
+          alt="trybewallet logo"
         />
         <input
           type="text"

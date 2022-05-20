@@ -44,7 +44,7 @@ class Table extends Component {
             const objCurrencies = Object.entries(despesa.exchangeRates)
               .find((element) => element[1].code === despesa.currency)[1];
             return (
-              <tr classname="despesas" key={ despesa.id }>
+              <tr className="despesas" key={ despesa.id }>
                 <td>{ despesa.description }</td>
                 <td>{ despesa.tag }</td>
                 <td>{ despesa.method }</td>
