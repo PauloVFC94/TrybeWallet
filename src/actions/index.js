@@ -1,7 +1,9 @@
 export const ADD_USER = 'ADD_USER';
 export const ADD_CURRENCIES = 'ADD_CURRENCIES';
 export const ADD_EXPENSES = 'ADD_EXPENSES';
-export const REMOVE_EXPENSES = 'REMOVE_EXPENSES,';
+export const REMOVE_EXPENSES = 'REMOVE_EXPENSES';
+export const EDIT_EXPENSES = 'EDIT_EXPENSES';
+export const EDIT_EXPENSES2 = 'EDIT_EXPENSES2';
 
 export const addUser = (email) => ({
   type: ADD_USER,
@@ -23,6 +25,16 @@ export const removeExpenses = (expenses) => ({
   type: REMOVE_EXPENSES,
   expenses,
 });
+
+export const editExpense = (edit) => ({
+  type: EDIT_EXPENSES,
+  edit,
+})
+
+export const editExpense2 = (expenses) => ({
+  type: EDIT_EXPENSES2,
+  expenses,
+})
 
 export const getCurrenciesThunk = () => {
   console.log('tuc');

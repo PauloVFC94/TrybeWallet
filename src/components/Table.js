@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { removeExpenses } from '../actions/index';
+import { editExpense, removeExpenses } from '../actions/index';
 
 class Table extends Component {
   removeBtn = ({ target }) => {
@@ -10,6 +10,19 @@ class Table extends Component {
     const base = expenses.filter((element) => element.description !== objDel);
     removeExp(base);
   };
+
+  editBtn = ({ target }) => {
+    const { expenses, editExp } = this.props;
+    const objEdit = target.value;
+    console.log(objEdit);
+    const edit = true;
+    const obj = expenses.filter((element) => element.description === objEdit)[0].id;
+    const editTarget = {
+      edit,
+      obj,
+    }
+    editExp(editTarget);
+  }
 
   render() {
     const { expenses } = this.props;
@@ -41,7 +54,14 @@ class Table extends Component {
                 <td>{ Number(despesa.value * objCurrencies.ask).toFixed(2) }</td>
                 <td>Real</td>
                 <td>
-                  <button type="button">Editar</button>
+                  <button
+                    value={ despesa.description }
+                    onClick={ this.editBtn }
+                    type="button"
+                    data-testid="edit-btn"
+                  >
+                    Editar
+                  </button>
                   <button
                     value={ despesa.description }
                     onClick={ this.removeBtn }
@@ -71,6 +91,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   removeExp: (expenses) => dispatch(removeExpenses(expenses)),
+  editExp: (expenses) => dispatch(editExpense(expenses)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Table);
