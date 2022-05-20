@@ -1,9 +1,13 @@
-import { ADD_CURRENCIES, ADD_EXPENSES, EDIT_EXPENSES, REMOVE_EXPENSES, EDIT_EXPENSES2 } from '../actions';
+import { ADD_CURRENCIES,
+  ADD_EXPENSES,
+  EDIT_EXPENSES,
+  REMOVE_EXPENSES,
+  EDIT_EXPENSES2 } from '../actions';
 
 const INITIAL_STATE = {
   currencies: [],
   expenses: [],
-  edit: [],
+  edit: false,
 };
 
 function wallet(state = INITIAL_STATE, action) {
@@ -28,10 +32,11 @@ function wallet(state = INITIAL_STATE, action) {
     };
   case EDIT_EXPENSES:
     return {
-    ...state,
-    edit: action.edit,
-    }
+      ...state,
+      edit: action.edit,
+    };
   case EDIT_EXPENSES2:
+    console.log('tuc');
     return {
       ...state,
       expenses: action.expenses,

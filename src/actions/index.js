@@ -29,12 +29,12 @@ export const removeExpenses = (expenses) => ({
 export const editExpense = (edit) => ({
   type: EDIT_EXPENSES,
   edit,
-})
+});
 
 export const editExpense2 = (expenses) => ({
   type: EDIT_EXPENSES2,
   expenses,
-})
+});
 
 export const getCurrenciesThunk = () => {
   console.log('tuc');
@@ -49,7 +49,7 @@ export const getCurrenciesThunk = () => {
 };
 
 export const getAPI = (expense) => {
-  console.log('tac');
+  console.log('tuc');
   return async (dispatch) => {
     const API = 'https://economia.awesomeapi.com.br/json/all';
     const response = await fetch(API);

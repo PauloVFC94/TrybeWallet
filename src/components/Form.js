@@ -16,7 +16,7 @@ class Form extends Component {
       description: '',
     };
   }
-  
+
   handleChangerForm = ({ target }) => {
     const { name } = target;
     this.setState({ [name]: target.value,
@@ -49,13 +49,13 @@ class Form extends Component {
 
   buttonEdit = (event) => {
     event.preventDefault();
-    const { expenses, editExp2, editExp, edit } = this.props;
+    const { editExp2, editExp, edit, expenses } = this.props;
     const { value, description, currency, method, tag } = this.state;
-    console.log(expenses);
-    let auxiliar = expenses;
-    const taxes = expenses[edit.obj].exchangeRates;
-    console.log(taxes);
-    auxiliar[edit.obj] = {
+    const auxiliar = [...expenses];
+    const indexObj = expenses.indexOf(expenses
+      .find((despesa) => despesa.id === edit.obj));
+    const taxes = expenses[indexObj].exchangeRates;
+    auxiliar[indexObj] = {
       id: edit.obj,
       value,
       currency,
@@ -145,22 +145,22 @@ class Form extends Component {
             <option value="Saúde">Saúde</option>
           </select>
         </label>
-        { typeof edit !== null ? (
-        <button
-          type="submit"
-          onClick={ this.buttonForm }
-          id="btn-form"
-        >
-          Adicionar Despesa
-        </button>
-        ) : ( 
-        <button
-          type="submit"
-          onClick={ this.buttonEdit }
-          id="btn-form-edit"
-        >
-          Editar despesa
-        </button>
+        { edit === false ? (
+          <button
+            type="submit"
+            onClick={ this.buttonForm }
+            id="btn-form"
+          >
+            Adicionar Despesa
+          </button>
+        ) : (
+          <button
+            type="submit"
+            onClick={ this.buttonEdit }
+            id="btn-form-edit"
+          >
+            Editar despesa
+          </button>
         )}
       </form>
     );
@@ -170,6 +170,10 @@ class Form extends Component {
 Form.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
   addExp: PropTypes.func.isRequired,
+  editExp: PropTypes.func.isRequired,
+  editExp2: PropTypes.func.isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
+  edit: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({

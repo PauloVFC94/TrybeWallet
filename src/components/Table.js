@@ -14,13 +14,12 @@ class Table extends Component {
   editBtn = ({ target }) => {
     const { expenses, editExp } = this.props;
     const objEdit = target.value;
-    console.log(objEdit);
     const edit = true;
     const obj = expenses.filter((element) => element.description === objEdit)[0].id;
     const editTarget = {
       edit,
       obj,
-    }
+    };
     editExp(editTarget);
   }
 
@@ -83,6 +82,7 @@ class Table extends Component {
 Table.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
   removeExp: PropTypes.func.isRequired,
+  editExp: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
